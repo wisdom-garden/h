@@ -15,6 +15,8 @@ TEST_URLS = [
     ("ftp://example.org", "ftp://example.org"),
     ("file://example.org", "file://example.org"),
 
+    # Should add httpx protocol when missing
+    ("example.org", "httpx://example.org"),
 
     # Should strip https://via.hypothes.is/ from the start of URIs
     ("https://via.hypothes.is/https://example.com", "httpx://example.com"),

@@ -162,6 +162,12 @@ def normalize(uristr):
     # Try to extract the scheme
     uri = urlparse.urlsplit(uristr)
 
+    # If the user didn't provide the scheme add it.
+    # This doesn't work on host:port urls.
+    if not uri.scheme and not uristr.startswith("http"):
+        uristr = "http://"+uristr
+        uri = urlparse.urlsplit(uristr)
+
     # If this isn't a URL, we don't perform any normalization
     if uri.scheme.lower() not in URL_SCHEMES:
         return decode_result(uristr)
