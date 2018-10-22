@@ -231,6 +231,49 @@ paths:
           description: Annotation not found or no permission to flag
           schema:
             $ref: '#/definitions/Error'
+  /annotations/{id}/hide:
+    put:
+      tags:
+        - annotations
+      summary: Hide an annotation
+      operationId: hideAnnotation
+      description: >
+        Hide (moderate) an annotation. Authenticated user must have `moderate`
+        permission for the group containing the annotation.
+      parameters:
+        - name: id
+          in: path
+          description: ID of annotation to hide (moderate)
+          required: true
+          type: string
+      responses:
+        '204':
+          description: Success
+        '404':
+          description: Annotation not found or no permission to moderate
+          schema:
+            $ref: '#/definitions/Error'
+    delete:
+      tags:
+        - annotations
+      summary: Show an annotation
+      operationId: unhideAnnotation
+      description: >
+        Show/un-hide an annotation. Authenticated user must have `moderate`
+        permission for the group containing the annotation.
+      parameters:
+        - name: id
+          in: path
+          description: ID of annotation to show/un-hide
+          required: true
+          type: string
+      responses:
+        '204':
+          description: Success
+        '404':
+          description: Annotation not found or no permission to moderate
+          schema:
+            $ref: '#/definitions/Error'
 
   /profile:
     get:
